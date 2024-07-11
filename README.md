@@ -1,7 +1,7 @@
 # BEECOME2
 
 Collection Territory Class:
-- `Myterritory2 myTerre`: Represents the parent territory to which the collection territory belongs.
+- `Myterritory2 myTerre`: Represents the territory to which the collection territory belongs.
 
 Simulation Parameters:
 - `int timeBeforeInitAlpha1BaseDa`, `int timeBeforeInitAlpha1BaseDv`, `int timeBeforeInitAlpha2BaseDa`, `int timeBeforeInitAlpha2BaseDv`: Represent the time before the initialization of different base values for alpha1 and alpha2 for food waste (Da) and green waste (Dv).
@@ -116,3 +116,76 @@ Key methods in the Myterritory2 class:
 - `checkConservationFlux(int y)`: Checks the conservation of fluxes at different stages of the simulation in a given year.
 
 The Myterritory2 class manages the overall simulation by coordinating the collection territories and the common valorization equipment. It ensures the conservation of fluxes and tracks the total waste quantities and flows throughout the simulation.
+
+Dynamics2 class:
+
+Waste Production Parameters:
+- `double b`: Quantity of biowaste produced per inhabitant (green and food waste).
+- `double qv`: Share of green waste in biowaste.
+- `double qa`: Share of food waste in biowaste.
+
+Waste Flow Rates and Objectives:
+- `double alpha1_base`: Base value for the proportion of biowaste going to local composting at the start of the simulation.
+- `double alpha3t0`: Initial proportion of the flow going to the waste collection center.
+- `double g`: Initial food waste percentage.
+- `double objGaspi`: Objective for food waste reduction rate.
+- `double theta1`, `double theta2`: Parameters for the sigmoid function modeling the social dynamics of sorting incentives.
+- `double seuil`: Maximum increase in the proportion of biowaste going to local composting during the simulation.
+
+Capacities:
+- `double K1courant`, `double KAcourant`: Current maximum capacities for local composting and door-to-door collection over the course of implementation.
+- `double K1`, `double KA`: Maximum capacities for local composting and door-to-door collection.
+- `double K2`: Maximum capacity of the methanizer.
+- `double K3`: Maximum capacity of the professional composting platform.
+
+Population and Growth:
+- `double accroissementAnnuel`: Annual population growth rate.
+
+Time Durations:
+- `double tiAG`: Inflection point of the sigmoid curve for anti-waste practice adoption.
+- `double tiLCL`: Inflection point of the sigmoid curve for local composting logistics implementation.
+- `double tiPCL`: Inflection point of the sigmoid curve for local composting practice adoption.
+- `double tiLC`: Inflection point of the sigmoid curve for door-to-door collection logistics implementation.
+- `double tiPT`: Inflection point of the sigmoid curve for sorting practice adoption.
+
+Waste Quantities and Flow Variables:
+- `double[] P`: Population size at each time step.
+- `double[] B`, `double[] Bv`, `double[] Ba`: Quantities of total biowaste, green waste, and food waste produced by the population.
+- `double[] Rtot`, `double[] R`, `double[] G`: Variables related to food waste reduction.
+- `double[] alpha1`, `double[] alpha2`, `double[] alpha3`: Proportions of biowaste going to local composting, door-to-door collection or residual household waste, and waste collection center.
+- `double[] C_log`, `double[] C_pop`: Variables related to the evolution of local composting logistics and practices.
+- `double[] Lv`, `double[] La`, `double[] La_bis`, `double[] Lv_bis`, `double[] Lfinal`: Quantities of green waste and food waste going to local composting, with adjustments for surplus management.
+- `double[] sL`, `double[] sLv`, `double[] sLa`, `double[] sLbis`: Variables related to surplus management in local composting.
+- `double[] Dv`: Quantity of green waste going to the waste collection center.
+- `double[] Av`, `double[] Aa`, `double[] Afinal`, `double[] Aa_bis`, `double[] Av_bis`: Quantities of green waste and food waste going to door-to-door collection, with adjustments for surplus management.
+- `double[] sAa`, `double[] sAv`, `double[] sAa_bis`, `double[] sAv_bis`, `double[] sA`, `double[] sAbis`: Variables related to surplus management in door-to-door collection.
+- `double[] O`: Quantity of food waste going to residual household waste.
+- `double[] Ptri`: Probability of sorting at each time step.
+- `double[] I`: Quantity of waste going to the incinerator.
+- `double[] Mv`, `double[] Ma`, `double[] Mfinal`: Quantities of green waste and food waste going to the methanizer, with adjustments for surplus management.
+- `double[] sM`, `double[] sMbis`, `double[] Ma_bis`, `double[] Mv_bis`, `double[] sMa`, `double[] sMv`: Variables related to surplus management in the methanizer.
+- `double[] sF`, `double[] sFv_meth`, `double[] sFv_inci`, `double[] Fv`, `double[] sFv`: Variables related to the professional composting platform and surplus management.
+
+Sigmoid Functions:
+- `double[] sigmoideAntiGaspi`: Stores the evolution of anti-waste practices based on time.
+- `double[] sigmoideLogCompostLocal`: Stores the evolution of local composting logistics based on time.
+- `double[] sigmoidePraticCompostLocal`: Stores the evolution of local composting practices based on time.
+- `double[] sigmoideLogCollecte`: Stores the evolution of door-to-door collection logistics based on time.
+- `double[] sigmoidePraticTri`: Stores the evolution of sorting practices based on time.
+
+Flux Conservation Checks:
+- `boolean[] checkFluxStage1`, `boolean[] checkFluxStage2`: Arrays to check the conservation of fluxes at different stages of the simulation.
+
+The Dynamics2 class simulates the waste management dynamics over time, including waste production, distribution of waste flows to different treatment options, and surplus management. It takes into account various parameters such as capacities, waste reduction objectives, and sigmoid functions to model the evolution of practices and logistics.
+
+Key methods in the Dynamics2 class:
+- `iterate(int year)`: Performs the simulation for a given year, including waste production, flow distribution, and treatment.
+- `computeProducedBioWaste(int y)`: Computes the quantity of biowaste produced by the population in a given year.
+- `computeFluxRates(int y)`: Computes the flow rates and proportions of waste going to different treatment options in a given year.
+- `localCompost(int y)`, `collect(int y)`, `dechetterie(int y)`, `ordureMenagereResiduelle(int y)`: Methods for distributing waste flows to local composting, door-to-door collection, waste collection centers, and residual household waste.
+- `computeMethanisation(int y)`, `computeCompostPlatform(int y)`, `computeIncinerator(int y)`: Methods for treating waste in the methanizer, professional composting platform, and incinerator.
+- `sigmoide(double x, double ti)`: Calculates the sigmoid function value for a given input and inflection point.
+- `init(int sizeData, double[] params)`: Initializes the simulation parameters and arrays.
+- `checkConservationFlux(int y)`: Checks the conservation of fluxes at different stages of the simulation in a given year.
+
+The Dynamics2 class explains waste management dynamics, considering various treatment options, capacities, and the evolution of practices and logistics over time.
