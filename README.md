@@ -8,7 +8,7 @@ Variables
 - `K1`, `KA`, `K2`, `K3`: Capacities for local composting, green waste collection, and professional composting facilities.
 - `theta1`, `theta2`: Parameters for the sigmoid function modeling social dynamics.
 - `seuil`, `accroissementAnnuel`: Population growth and threshold parameters for biowaste management.
-- `tiAG`, `tiLCL`, `tiPCL`, `tiLC`, `tiPT`: Inflection points for various logistic curves.
+-  `tiPCL`, `tiPT`: Inflection points for various social intention.
 Arrays
 Arrays to store values for population size, biowaste production, waste reduction, sorting probabilities, and waste flows over time.
 Constructor
