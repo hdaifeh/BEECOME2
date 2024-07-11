@@ -2,8 +2,8 @@
 Biowaste
 This class handles the dynamic aspects of the biowaste management system. Below is a detailed breakdown of its components and methods:
 Variables
-- `b`, `qv`, `qa`: Parameters for biowaste production and waste composition.
-- `alpha1_base`, : Initial intention of food composting.
+- `b`, `qv`, `qa`: Parameters for biowaste production per capita (food and green) and waste composition.
+- `alpha1_base`, : Initial intention of composting.
 - `g`, `objGaspi`: Parameters related to food waste reduction.
 - `K1`, `KA`, `K2`, `K3`: Capacities for local composting, green waste collection, and professional composting facilities.
 - `theta1`, `theta2`: Parameters for the sigmoid function modeling social dynamics.
