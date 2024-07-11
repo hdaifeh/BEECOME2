@@ -10,12 +10,10 @@ Simulation Parameters:
 - `double K1cible`, `double KAcible`: Target maximum capacities for local composting and collection.
 - `int yearRef`: Reference year for individual composting capacity.
 
-Sigmoid Functions:
-- `double[] sigmoideLogCompostLocal`: Stores the evolution of local composting logistics based on time.
+Sigmoid Functions (innovation diffusion to model social behaviour):
 - `double[] sigmoidePraticCompostLocalDa`, `double[] sigmoidePraticCompostLocalDv`: Store the evolution of local composting practices for food waste (Da) and green waste (Dv) based on time.
-- `double[] sigmoideLogCollecte`: Stores the evolution of collection logistics based on time.
 - `double[] sigmoidePraticTriDa`, `double[] sigmoidePraticTriDv`: Store the evolution of sorting practices for food waste (Da) and green waste (Dv) based on time.
-- `double[] sigmoideEvitGreenWaste`: Stores the evolution of the green waste avoidance coefficient to be applied to the green waste reduction rate.
+- `double[] sigmoideEvitGreenWaste`: Stores the evolution of the green waste avoidance (reduction) innovation diffusion to be applied to the green waste reduction rate.
 
 Waste Flow Rates:
 - `double alpha1BaseDa`, `double alpha1BaseDv`: Base values for the proportion of food waste (Da) and green waste (Dv) going to local composting at the start of the simulation.
