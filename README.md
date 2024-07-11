@@ -273,3 +273,40 @@ The class provides methods for writing the simulation results and trajectories t
 The indicators and objectives calculated in the `indicatorsObjectives` method assess the performance of the waste management system in terms of valorization rates, solutions for waste treatment, reduction of waste volumes, and achievement of specific targets set by the French government.
 
 Overall, the MyModel2 class serves as the main entry point for the simulation model, handling the initialization, execution, and output of the simulation results based on the provided parameters and objectives.
+
+MultiSimParam2 class
+The MultiSimParam2 class is designed to run multiple simulations with different sets of parameters. It allows for batch processing of simulations by reading parameter sets from a file and executing the MyModel2 class for each set of parameters.
+
+
+Instance Variables:
+- `Vector jeuxParam`: A vector to store the parameter sets.
+- `Vector dossierResult`: A vector to store the result folders.
+
+Constructors:
+- `MultiSimParam2(String fileName, int nLDebut, int nLFin, int fs)`: Constructs a MultiSimParam2 object with the specified file name, starting line number, ending line number, and frequency of saving results. It reads the parameter sets from the specified file and executes the MyModel2 class for each set of parameters.
+- `MultiSimParam2(String fileName, String nomFichierSortie, int nLDebut, int nLFin, int fs)`: Similar to the previous constructor but with an additional parameter to specify the output file name.
+- `MultiSimParam2(String fileName, int nLDebut, int fs)`: Constructs a MultiSimParam2 object with the specified file name, starting line number, and frequency of saving results. It determines the ending line number by counting the total number of lines in the file.
+
+Static Methods:
+- `nombreLignes(String fileName)`: Counts the number of lines in the specified file.
+- `marqueur(String s)`: Checks if a string starts with a hyphen ("-"), indicating a command-line option.
+- `messageParam()`: Displays a reminder message about the command-line parameters.
+- `main(String[] args)`: The main method of the class, which parses the command-line arguments and creates a MultiSimParam2 object based on the provided parameters. It handles the following command-line options:
+  - `-o`: Specifies the output file name.
+  - `-f`: Specifies the frequency of saving results.
+
+The main workflow of the MultiSimParam2 class is as follows:
+1. The class reads the parameter sets from a specified file.
+2. It creates a MyModel2 object for each set of parameters and executes the simulation.
+3. The simulation results can be saved to an output file at a specified frequency.
+4. The class keeps track of the progress by printing a message after each simulation run.
+
+The command-line arguments for running the MultiSimParam2 class are as follows:
+- The name of the parameter file.
+- (Optional) The starting line number and ending line number of the parameter sets in the file.
+- (Optional) `-o` followed by the output file name.
+- (Optional) `-f` followed by the frequency of saving results.
+
+If the required parameters are not provided or there is a problem with the command-line arguments, the `messageParam()` method is called to display a reminder message about the expected parameters.
+
+Overall, the MultiSimParam2 class provides a convenient way to run multiple simulations with different parameter sets by automating the process of reading parameters from a file and executing the MyModel2 class for each set of parameters. It simplifies the task of running batch simulations and allows for easy customization of the output and saving frequency.
