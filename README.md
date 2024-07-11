@@ -16,13 +16,15 @@ Sigmoid Functions (innovation diffusion to model social behaviour):
 - `double[] sigmoidePraticTriDa`, `double[] sigmoidePraticTriDv`: Store the evolution of sorting practices for food waste (Da) and green waste (Dv) based on time.
 - `double[] sigmoideEvitGreenWaste`: Stores the evolution of the green waste avoidance (reduction) innovation diffusion to be applied to the green waste reduction rate.
 
-Waste Flow Rates:
+Intention Rates:
 - `double alpha1BaseDa`, `double alpha1BaseDv`: Base values for the proportion of food waste (Da) and green waste (Dv) going to local composting at the start of the simulation.
 - `double alpha1ObjectifDa`, `double alpha1ObjectifDv`: Maximum increase in the proportion of food waste (Da) and green waste (Dv) going to local composting during the simulation.
 - `double alpha2baseDa`, `double alpha2objectifDa`, `double alpha2baseDv`, `double alpha2objectifDv`: Base and target values for the sorting rates of food waste (Da) and green waste (Dv) for door-to-door collection.
 - `double alpha3t0`: Initial proportion of the flow going to the waste collection center.
 
-Population and Waste Production:
+Demographic parameters
+![image](https://github.com/hdaifeh/BEECOME2/assets/73614180/4980af69-8bb3-4007-9a87-88fff0c1460f)
+:
 - `double accroissementAnnuel`: Annual population growth rate.
 - `int sizePop`: Population size of the collection territory.
 - `double BaInit`, `double BvInit`: Initial quantities of food waste (Ba) and green waste (Bv) produced per inhabitant per year in tons.
