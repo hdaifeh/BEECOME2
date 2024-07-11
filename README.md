@@ -61,32 +61,58 @@ Additional Variables:
 - `int ident`: Identifier of the collection territory.
 
 These variables and parameters are used to model and simulate the waste management processes in the collection territories, including local composting, door-to-door collection, waste collection centers, and residual household waste. The class includes methods to calculate waste production, distribute waste flows, manage surplus, and track various indicators related to waste management over time.
-Dynamic class:
-This class handles the dynamic aspects of the biowaste management system. Below is a detailed breakdown of its components and methods:
-Variables
-- `b`, `qv`, `qa`: Parameters for biowaste production per capita (food and green) and waste composition.
-- `alpha1_base`, : Initial intention of composting.
-- `g`, `objGaspi`: Parameters related to food waste reduction.
-- `K1`, `KA`, `K2`, `K3`: Capacities for local composting, green waste collection, and professional composting facilities.
-- `theta1`, `theta2`: Parameters for the sigmoid function modeling social dynamics.
-- `seuil`, `accroissementAnnuel`: Population growth and threshold parameters for biowaste management.
--  `tiPCL`, `tiPT`: Inflection points for various social intention.
-Arrays
-Arrays to store values for population size, biowaste production, waste reduction, sorting probabilities, and waste flows over time.
-Constructor
-- `Dynamics2(double[] parameters)`: Initializes the class with given parameters and runs the simulation for the specified duration.
-Methods
-- `iterate(int year)`: Simulates the biowaste management dynamics for a given year.
-- `computeProducedBioWaste(int y)`: Calculates the production of biowaste based on population size and waste reduction strategies.
-- `computeFluxRates(int y)`: Computes the distribution rates of biowaste to different management pathways.
-- `localCompost(int y)`: Models the local composting process and handles potential surplus.
-- `collect(int y)`: Manages the collection of biowaste and handles surplus.
-- `dechetterie(int y)`: Manages the flow of biowaste to waste facilities.
-- `ordureMenagereResiduelle(int y)`: Manages the flow of residual waste.
-- `computeMethanisation(int y)`: Models the methanisation process for biowaste.
-- `computeCompostPlatform(int y)`: Manages the compost platform and handles surplus.
-- `computeIncinerator(int y)`: Models the incineration process for biowaste.
-- `sigmoide(double x, double ti)`: Sigmoid function used to model social dynamics.
-- `init(int sizeData, double[] params)`: Initializes arrays and parameters for the simulation.
-- `printVector(double[] edit)`: Utility method to print array values.
-- `checkConservationFlux(int y)`: Ensures the conservation of mass in the biowaste flow calculations.
+
+Myterritory2 class:
+
+Territory Class:
+- `boolean printTrajectory`: Determines whether to print the trajectory of the simulation.
+- `boolean useSocialDynamics`: Allows to cancel the evolution of the behavioral intention (i.e., the alpha values) when set to false.
+
+Waste Reduction and Anti-Waste Parameters:
+- `double einit`: Initial edible part of the food waste production.
+- `double theta1`, `double theta2`: Parameters for the sigmoid function modeling the social dynamics of sorting incentives.
+- `double tiAG`: Inflection point of the sigmoid curve for anti-waste practice adoption.
+
+Total Waste Quantities and Flow Variables:
+- `double[] Ptot`: Total population size at each time step.
+- `double[] Btot`, `double[] Batot`, `double[] Bvtot`: Total quantities of biowaste, food waste, and green waste produced by the population.
+- `double[] RGlobtot`: Total quantity of waste reduction due to anti-waste efforts.
+- `double[] Lfinaltot`: Total quantity of biowaste in local composting after surplus management.
+- `double[] Afinaltot`: Total quantity of biowaste in door-to-door collection after surplus management.
+- `double[] Otot`: Total quantity of food waste going to residual household waste.
+- `double[] Dvtot`: Total quantity of green waste going to waste collection centers.
+- `double[] sLatot`, `double[] sLvtot`: Total compostable food and green waste surpluses.
+- `double[] sAvtot`, `double[] sAatot`: Total compostable green and food waste surpluses from door-to-door collection.
+
+Reference Year and Initial Values:
+- `int refYear`: Reference year between 0 and the number of simulation years for evaluating objectives such as increase or decrease.
+- `double firstYearDechetterieDechetVertTot`: Total quantity of green waste in waste collection centers in the first year.
+- `double firstYearVolumeDechetOMRTot`: Total volume of residual household waste in the first year.
+
+Anti-Waste Sigmoid Function:
+- `double[] sigmoideAntiGaspi`: Stores the evolution of anti-waste practices based on time.
+
+Flux Conservation Checks:
+- `boolean[] checkFluxStage1`, `boolean[] checkFluxStage2`: Arrays to check the conservation of fluxes at different stages of the simulation.
+
+Territory Composition:
+- `int territoryName`: Identifier of the territory.
+- `int nbSubterritories`: Number of collection territories within the territory.
+- `int nbEquipments`: Number of valorization equipment units.
+- `Subterritory2[] myTerrit`: Array of collection territories belonging to the territory.
+- `EquipmentValorisation2 myCommonEquip`: Common valorization equipment shared by the collection territories.
+
+Objectives:
+- `double increasedObjectiveOfMethanisedFoodWaste`: Increased objective for methanized food waste.
+
+The Myterritory2 class acts as a container for the collection territories (Subterritory2 objects) and the common valorization equipment (EquipmentValorisation2 object). It initializes and manages the simulation for the entire territory.
+
+Key methods in the Myterritory2 class:
+- `computeSubterritories(int year)`: Computes the waste production and distribution for each collection territory in a given year.
+- `sigmoide(double x, double ti)`: Calculates the sigmoid function value for a given input and inflection point.
+- `init(int sizeData, double[] params)`: Initializes the territory parameters and common valorization equipment.
+- `computeTotalFluxSubTerritories(int y)`: Computes the total waste fluxes for all collection territories in a given year.
+- `computeFluxesForCommonEquipment(int y)`: Computes the waste fluxes for the common valorization equipment in a given year.
+- `checkConservationFlux(int y)`: Checks the conservation of fluxes at different stages of the simulation in a given year.
+
+The Myterritory2 class manages the overall simulation by coordinating the collection territories and the common valorization equipment. It ensures the conservation of fluxes and tracks the total waste quantities and flows throughout the simulation.
