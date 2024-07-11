@@ -223,3 +223,53 @@ The waste treatment follows a specific order:
 3. Incineration: The residual household waste (fluxOMR) and any surplus from the professional composting platform that couldn't be processed in the methanizer (sFv_inci) are sent to the incinerator.
 
 The EquipmentValorisation2 class provides detailed management of biowaste treatment, optimizing the use of available capacities and ensuring the efficient valorization of waste flows from the territories.
+
+
+MyModel2 class:
+
+Simulation Settings:
+- `boolean printTrajectory`: Determines whether to print the detailed trajectory of the simulation.
+- `PrintStream console`, `PrintStream ps`, `FileOutputStream fic`: Variables for writing the simulation results to a file.
+- `String nomFichier`: Name of the file to write the simulation results.
+- `double[] paramsTerritory`: Array to store the global parameters for the territory.
+- `int nameExpe`: Identifier of the experiment.
+
+Simulation Parameters:
+- `int nbYearsSimu`: Number of years for the simulation.
+- `int nbSubterritories`: Number of sub-territories in the territory.
+- `double[][] paramsSubTerritories`: 2D array to store the parameters for each sub-territory.
+
+Territory and Dynamics:
+- `Myterritory2 myDyn`: Object representing the territory and its dynamics.
+
+Methods:
+- `MyModel2(String param, int ligne, int fs, boolean entete)`, `MyModel2(String param, String nomFichR, int ligne, int fs, boolean entete)`: Constructors for initializing the model with different parameters.
+- `lectureEntree(String fileName, int ligne, int frequenceSauvegarde, boolean entete)`: Reads the input parameters from a file.
+- `ecritureResultats(String nameResult)`: Writes the simulation results to a file.
+- `ecritureResultatsComputed(int nbYears)`: Writes the computed simulation results to a file.
+- `ecritureTrajectoire(int nbYears)`: Writes the trajectory of the simulation to a file.
+- `indicatorsObjectives(int nbYears)`: Calculates indicators and objectives for the simulation.
+
+Indicators and Objectives:
+- `double[] valorizationRate`: Array to store the valorization rates.
+- `int[] goodValorRate`: Array to store the status of good valorization rates.
+- `double[] nbSolutionsForAllForGreen`, `double[] nbSolutionsForAllForFood`: Arrays to store the number of solutions for green waste and food waste.
+- `int[] solutionForAllForGreen`, `int[] solutionForAllForFood`: Arrays to store the status of solutions for green waste and food waste.
+- `double[] tauxEvolutionGreenWaste`, `double[] increaseOfMethanisedFoodWaste`: Arrays to store the evolution rates of green waste and the increase of methanized food waste.
+- `int[] diminutionGreenWaste`, `int[] correctIncreaseOfMethanisedFoodWaste`: Arrays to store the status of green waste reduction and correct increase of methanized food waste.
+- `int[] volMethanised`: Array to store the status of methanized volumes.
+- `double[] multiplicateurVolumeBiodechetOMR`: Array to store the multiplier for biowaste volume in residual household waste.
+- `int[] diminutionVolBiodechetOMR`: Array to store the status of biowaste volume reduction in residual household waste.
+- `double[] kgDechetAlimDansOMRByHab`: Array to store the kilograms of food waste per inhabitant in residual household waste.
+- `double[] totalIntentionForFoodWaste`, `double[] totalIntentionForGreenWasteWithoutDechetterie`: Arrays to store the total intentions for food waste and green waste (excluding waste collection centers).
+- `int[] correct`, `int[] sommeRespectedObjectifs`: Arrays to store the status of correct objectives and the sum of respected objectives.
+
+The MyModel2 class is responsible for initializing and running the simulation model. It reads the input parameters from a file, initializes the territory and sub-territories based on the parameters, and runs the simulation for the specified number of years.
+
+During the simulation, it calculates various indicators and objectives related to waste management, such as valorization rates, solutions for waste treatment, evolution rates of waste, and achievement of specific objectives.
+
+The class provides methods for writing the simulation results and trajectories to files, allowing for analysis and visualization of the simulation outcomes.
+
+The indicators and objectives calculated in the `indicatorsObjectives` method assess the performance of the waste management system in terms of valorization rates, solutions for waste treatment, reduction of waste volumes, and achievement of specific targets set by the French government.
+
+Overall, the MyModel2 class serves as the main entry point for the simulation model, handling the initialization, execution, and output of the simulation results based on the provided parameters and objectives.
