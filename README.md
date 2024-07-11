@@ -176,16 +176,50 @@ Sigmoid Functions:
 Flux Conservation Checks:
 - `boolean[] checkFluxStage1`, `boolean[] checkFluxStage2`: Arrays to check the conservation of fluxes at different stages of the simulation.
 
-The Dynamics2 class simulates the waste management dynamics over time, including waste production, distribution of waste flows to different treatment options, and surplus management. It takes into account various parameters such as capacities, waste reduction objectives, and sigmoid functions to model the evolution of practices and logistics.
+The Dynamics2 class simulates the waste management dynamics over time, including waste production, distribution of waste flows to different treatment options and surplus management. It takes into account various parameters such as capacities, waste reduction objectives, and sigmoid functions to model the evolution of practices and logistics.
 
 Key methods in the Dynamics2 class:
 - `iterate(int year)`: Performs the simulation for a given year, including waste production, flow distribution, and treatment.
 - `computeProducedBioWaste(int y)`: Computes the quantity of biowaste produced by the population in a given year.
 - `computeFluxRates(int y)`: Computes the flow rates and proportions of waste going to different treatment options in a given year.
-- `localCompost(int y)`, `collect(int y)`, `dechetterie(int y)`, `ordureMenagereResiduelle(int y)`: Methods for distributing waste flows to local composting, door-to-door collection, waste collection centers, and residual household waste.
+- `localCompost(int y)`, `collect(int y)`, `dechetterie(int y)`, `ordureMenagereResiduelle(int y)`: Methods for distributing waste flows to local composting, door-to-door collection, waste collection centres, and residual household waste.
 - `computeMethanisation(int y)`, `computeCompostPlatform(int y)`, `computeIncinerator(int y)`: Methods for treating waste in the methanizer, professional composting platform, and incinerator.
 - `sigmoide(double x, double ti)`: Calculates the sigmoid function value for a given input and inflection point.
 - `init(int sizeData, double[] params)`: Initializes the simulation parameters and arrays.
-- `checkConservationFlux(int y)`: Checks the conservation of fluxes at different stages of the simulation in a given year.
+- `checkConservationFlux(int y)`: Checks the conservation of fluxes at different simulation stages in a given year.
 
 The Dynamics2 class explains waste management dynamics, considering various treatment options, capacities, and the evolution of practices and logistics over time.
+
+EquipmentValorisation2 class:
+
+Capacities:
+- `double K2`: Maximum capacity of the methanizer.
+- `double K3`: Maximum capacity of the professional composting platform.
+- `double KInc`: Maximum capacity of the incinerator.
+
+Waste Quantities and Flow Variables:
+- `double[] I`: Quantity of waste going to the incinerator.
+- `double[] Mv`, `double[] Ma`, `double[] Mfinal`: Quantities of green waste and food waste going to the methanizer, with adjustments for surplus management.
+- `double[] sM`, `double[] sMbis`, `double[] Ma_bis`, `double[] Mv_bis`, `double[] sMa`, `double[] sMv`: Variables related to surplus management in the methanizer.
+- `double[] sF`, `double[] sFv_meth`, `double[] sFv_inci`, `double[] Fv`, `double[] sFv`: Variables related to the professional composting platform and surplus management.
+
+The EquipmentValorisation2 class represents the common equipment for the valorization of biowaste, including a methanizer, a professional composting platform, and an incinerator. It manages the treatment of biowaste flows coming from one or more territories.
+
+Key methods in the EquipmentValorisation2 class:
+- `init(int sizeData, int KMethaniseur, int KIncinerator, int KnbCompostPro)`: Initializes the equipment capacities and arrays.
+- `iterate(int year, double fluxAv, double fluxAa, double fluxDv, double fluxOMR)`: Performs the waste treatment for a given year, considering the incoming waste flows from the territories.
+- `computeMethanisation(int y, double fluxAv, double fluxAa)`: Processes the waste in the methanizer, managing any surplus.
+- `computeCompostPlatform(int y, double fluxDv)`: Processes the waste in the professional composting platform, managing any surplus and redistributing it to the methanizer or incinerator if necessary.
+- `computeIncinerator(int y, double fluxOMR)`: Processes the waste in the incinerator, including residual household waste and any surplus from the professional composting platform.
+- `printTrajectory(int year)`: Prints the trajectory of the waste flows and quantities for a given year.
+
+The EquipmentValorisation2 class ensures the efficient treatment of biowaste flows, prioritizing the use of the methanizer, followed by the professional composting platform, and finally the incinerator. It manages surplus waste by redistributing it to the appropriate treatment options based on available capacities.
+
+The class assumes that there is one set of common equipment (methanizer, professional composting platform, incinerator) shared by one or more territories. It also assumes that there is at most one professional composting platform per territory.
+
+The waste treatment follows a specific order:
+1. Methanization: The incoming waste flows from door-to-door collection (fluxAv for green waste and fluxAa for food waste) are first processed in the methanizer. If there is a surplus exceeding the methanizer's capacity, the green waste is redirected to the professional composting platform, and any remaining surplus of food waste is sent to the incinerator.
+2. Professional Composting: The incoming waste flow from the waste collection center (fluxDv) and any surplus green waste from the methanizer (sMv) are processed in the professional composting platform. If there is a surplus exceeding the platform's capacity, it is redistributed to the methanizer if there is available capacity, and any remaining surplus is sent to the incinerator.
+3. Incineration: The residual household waste (fluxOMR) and any surplus from the professional composting platform that couldn't be processed in the methanizer (sFv_inci) are sent to the incinerator.
+
+The EquipmentValorisation2 class provides detailed management of biowaste treatment, optimizing the use of available capacities and ensuring the efficient valorization of waste flows from the territories.
