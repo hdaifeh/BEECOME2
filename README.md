@@ -1,7 +1,9 @@
 # BEECOME2
 Our model is a Java-based project designed to model and analyze the dynamics of biowaste. This project aims to understand how human behavior and infrastructure interact to achieve biowaste policy objectives. It includes multiple Java classes that represent different components of biowaste management:
 
-Collection Territory Class:
+
+![image](https://github.com/hdaifeh/BEECOME2/assets/73614180/6f9c8ef7-5174-4cb6-ba10-e71b04776e57)
+
 - `Myterritory2 myTerre`: Represents the territory to which the collection territory belongs.
 
 Simulation Parameters:
@@ -67,7 +69,9 @@ Additional Variables:
 
 These variables and parameters are used to model and simulate the waste management processes in the collection territories, including local composting, door-to-door collection, waste collection centers, and residual household waste. The class includes methods to calculate waste production, distribute waste flows, manage surplus, and track various indicators related to waste management over time.
 
-Myterritory2 class:
+2. Myterritory2 class:
+![image](https://github.com/hdaifeh/BEECOME2/assets/73614180/ad0606e9-0aa9-412a-9e22-7f38b2d56b9d)
+
 
 Territory Class:
 - `boolean printTrajectory`: Determines whether to print the trajectory of the simulation.
@@ -122,7 +126,9 @@ Key methods in the Myterritory2 class:
 
 The Myterritory2 class manages the overall simulation by coordinating the collection territories and the common valorization equipment. It ensures the conservation of fluxes and tracks the total waste quantities and flows throughout the simulation.
 
-Dynamics2 class:
+
+![image](https://github.com/hdaifeh/BEECOME2/assets/73614180/3d5c4580-c851-4ad4-a315-2f8250d5b2f5)
+
 
 Waste Production Parameters:
 - `double b`: Quantity of biowaste produced per inhabitant (green and food waste).
@@ -195,7 +201,9 @@ Key methods in the Dynamics2 class:
 
 The Dynamics2 class explains waste management dynamics, considering various treatment options, capacities, and the evolution of practices and logistics over time.
 
-EquipmentValorisation2 class:
+
+![image](https://github.com/hdaifeh/BEECOME2/assets/73614180/53c2fcf2-cc2d-404b-a6af-bc4f82f9b769)
+
 
 Capacities:
 - `double K2`: Maximum capacity of the methanizer.
@@ -230,7 +238,7 @@ The waste treatment follows a specific order:
 The EquipmentValorisation2 class provides detailed management of biowaste treatment, optimizing the use of available capacities and ensuring the efficient valorization of waste flows from the territories.
 
 
-MyModel2 class:
+![image](https://github.com/hdaifeh/BEECOME2/assets/73614180/8799329d-26e0-4543-9c0f-7ae5eea0499e)
 
 Simulation Settings:
 - `boolean printTrajectory`: Determines whether to print the detailed trajectory of the simulation.
@@ -279,7 +287,9 @@ The indicators and objectives calculated in the `indicatorsObjectives` method as
 
 Overall, the MyModel2 class serves as the main entry point for the simulation model, handling the initialization, execution, and output of the simulation results based on the provided parameters and objectives.
 
-MultiSimParam2 class
+
+![image](https://github.com/hdaifeh/BEECOME2/assets/73614180/efb25291-905b-4dc5-9d95-46cc3face103)
+
 The MultiSimParam2 class is designed to run multiple simulations with different sets of parameters. It allows for batch processing of simulations by reading parameter sets from a file and executing the MyModel2 class for each set of parameters.
 
 
