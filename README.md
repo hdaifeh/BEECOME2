@@ -1,4 +1,5 @@
 # BEECOME2
+Our model is a Java-based project designed to model and analyze the dynamics of biowaste. This project aims to understand how human behavior and infrastructure interact to achieve biowaste policy objectives. It includes multiple Java classes that represent different components of biowaste management:
 
 Collection Territory Class:
 - `Myterritory2 myTerre`: Represents the territory to which the collection territory belongs.
