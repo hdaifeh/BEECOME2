@@ -9,33 +9,33 @@ Our model is a Java-based project designed to model and analyze the dynamics of 
 Simulation Parameters:
 - `int timeBeforeInitAlpha1BaseDa`, `int timeBeforeInitAlpha1BaseDv`, `int timeBeforeInitAlpha2BaseDa`, `int timeBeforeInitAlpha2BaseDv`: Represent the time before the initialization of different base values for alpha1 and alpha2 for food waste (Da) and green waste (Dv).
 - `double K1init`, `double KAinit`: Initial capacities for local composting and collection, respectively.
-- `double[] K1courant`, `double[] KAcourant`: Current maximum capacities for local composting and collection over the course of implementation.
+- `double[] K1courant`, `double[] KAcourant`: Current maximum capacities for local composting and collection throughout implementation.
 - `double K1cible`, `double KAcible`: Target maximum capacities for local composting and collection.
 - `int yearRef`: Reference year for individual composting capacity.
 
 
-![image](https://github.com/hdaifeh/BEECOME2/assets/73614180/77a069b2-28a5-4034-b9bb-0e93c4df5d85)
+Sigmoid function (innovation diffusion to model social behaviour)
 
 - `double[] sigmoidePraticCompostLocalDa`, `double[] sigmoidePraticCompostLocalDv`: Store the evolution of local composting practices for food waste (Da) and green waste (Dv) based on time.
 - `double[] sigmoidePraticTriDa`, `double[] sigmoidePraticTriDv`: Store the evolution of sorting practices for food waste (Da) and green waste (Dv) based on time.
 - `double[] sigmoideEvitGreenWaste`: Stores the evolution of the green waste avoidance (reduction) innovation diffusion to be applied to the green waste reduction rate.
 
 
-![image](https://github.com/hdaifeh/BEECOME2/assets/73614180/e795f574-3d9b-43c6-91a1-43d7deee03c1)
+Intention rates
 
 - `double alpha1BaseDa`, `double alpha1BaseDv`: Base values for the proportion of food waste (Da) and green waste (Dv) going to local composting at the start of the simulation.
 - `double alpha1ObjectifDa`, `double alpha1ObjectifDv`: Maximum increase in the proportion of food waste (Da) and green waste (Dv) going to local composting during the simulation.
 - `double alpha2baseDa`, `double alpha2objectifDa`, `double alpha2baseDv`, `double alpha2objectifDv`: Base and target values for the sorting rates of food waste (Da) and green waste (Dv) for door-to-door collection.
-- `double alpha3t0`: Initial proportion of the flow going to the waste collection center.
+- `double alpha3t0`: Initial proportion of the flow going to the waste collection centre.
 
 
-![image](https://github.com/hdaifeh/BEECOME2/assets/73614180/4980af69-8bb3-4007-9a87-88fff0c1460f)
+Demographic parameters
 :
 - `double accroissementAnnuel`: Annual population growth rate.
 - `int sizePop`: Population size of the collection territory.
 - `double BaInit`, `double BvInit`: Initial quantities of food waste (Ba) and green waste (Bv) produced per inhabitant per year in tons.
 
-Time Durations:
+Time Duration:
 - `double duraImplemCompo`: Inflection point of the sigmoid curve for local composting implementation.
 - `double tiPCL`: Inflection point of the sigmoid curve for local composting practice adoption.
 - `double duraImplemCollect`: Inflection point of the sigmoid curve for collection implementation.
